@@ -24,7 +24,7 @@ while (!Thread.currentThread().isInterrupted())
 ```
 
 ## License
-Java-DiscordRPC (and Discord RPC in general) is licensed under the MIT License.
+Java-DiscordRPC is licensed under the Apache 2.0 License. The base DiscordRPC is licensed under the MIT license.
 
 ## Contributing
 Find something that is lacking? Fork the project and pull request!
