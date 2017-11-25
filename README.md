@@ -1,4 +1,4 @@
-
+[ ![jitpack](https://jitpack.io/v/MinnDevelopment/Java-DiscordRPC.svg) ](https://jitpack.io/#MinnDevelopment/Java-DiscordRPC)
 # Java-DiscordRPC
 
 This library contains Java bindings for [Discord's official RPC SDK](https://github.com/discordapp/discord-rpc) using JNA. 
