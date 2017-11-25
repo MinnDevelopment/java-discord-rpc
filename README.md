@@ -3,7 +3,13 @@
 
 This library contains Java bindings for [Discord's official RPC SDK](https://github.com/discordapp/discord-rpc) using JNA. 
 
-This project provides binaries for `linux-x86-64` and `win32-x86-64`.
+This project provides binaries for `linux-x86-64`, `win32-x86-64` and `darwin`.
+
+If, on macOS, you get the following message:
+```
+Error in LSRegisterURL: -10811
+``` 
+it can safely be ignored.
 
 ## Examples
 
