@@ -1,26 +1,40 @@
+
 # Java-DiscordRPC
 
-This library contains Java bindings for Discord's Rich Presence API (https://github.com/discordapp/discord-rpc) using JNA. 
+This library contains Java bindings for [Discord's official RPC SDK](https://github.com/discordapp/discord-rpc) using JNA. 
 
-It is currently specific to the Windows 64 bit platform.
+This project provides binaries for `linux-x86-64` and `win32-x86-64`.
 
 ## Examples
-Here is an example on how to use the API.
 
 ```java
-DiscordRPC lib = DiscordRPC.INSTANCE;
-String applicationId = "";
-String steamId = "";
-DiscordEventHandlers handlers = new DiscordEventHandlers();
-handlers.ready = () -> System.out.println("Ready!");
-lib.Discord_Initialize(applicationId, handlers, true, steamId);
-DiscordRichPresence presence = new DiscordRichPresence();
-presence.startTimestamp = System.currentTimeMillis() / 1000; // epoch second
-presence.details = "Testing RPC";
-lib.Discord_UpdatePresence(presence);
-// in a worker thread
-while (!Thread.currentThread().isInterrupted())
-    lib.Discord_RunCallbacks();
+import club.minnced.discord.rpc.*;
+
+public class Main {
+
+    public static void main(String[] args) {
+        DiscordRPC lib = DiscordRPC.INSTANCE;
+        String applicationId = "";
+        String steamId = "";
+        DiscordEventHandlers handlers = new DiscordEventHandlers();
+        handlers.ready = () -> System.out.println("Ready!");
+        lib.Discord_Initialize(applicationId, handlers, true, steamId);
+        DiscordRichPresence presence = new DiscordRichPresence();
+        presence.startTimestamp = System.currentTimeMillis() / 1000; // epoch second
+        presence.details = "Testing RPC";
+        lib.Discord_UpdatePresence(presence);
+        // in a worker thread
+        new Thread(() -> {
+            while (!Thread.currentThread().isInterrupted()) {
+                lib.Discord_RunCallbacks();
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException ignored) {}
+            }
+        }, "RPC-Callback-Handler").start();
+    }
+
+}
 ```
 
 ## License
