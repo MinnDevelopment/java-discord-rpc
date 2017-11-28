@@ -10,7 +10,7 @@ If, on macOS, you get the following message which can be ignored: `Error in LSRe
 ## Documentation
 
 You can see the official discord documentation in the [API Documentation](https://discordapp.com/developers/docs/rich-presence/how-to).
-<br>Alternatively you may visist the javadoc at [jitpack](https://jitpack.io/com/github/MinnDevelopment/master-SNAPSHOT/javadoc/index.html).
+<br>Alternatively you may visist the javadoc at [jitpack](https://jitpack.io/com/github/MinnDevelopment/Java-DiscordRPC/master-SNAPSHOT/javadoc/index.html).
 
 ## Examples
 
