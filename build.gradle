@@ -15,14 +15,15 @@
  */
 plugins {
    id 'com.github.johnrengelman.shadow' version '2.0.1'
+   id 'maven-publish'
 }
 
 group 'club.minnced'
-version '1.0-SNAPSHOT'
+version '1.2'
 
 apply plugin: 'java'
 
-build.dependsOn shadowJar
+
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
@@ -33,4 +34,73 @@ repositories {
 
 dependencies {
     compile 'net.java.dev.jna:jna:4.4.0'
+}
+
+wrapper {
+    gradleVersion = '4.2.1'
+}
+
+// Publishing
+
+task sources(type: Copy) {
+    from 'src/main/java'
+    into "$buildDir/sources"
+}
+
+classes.dependsOn sources
+
+jar {
+    baseName = project.name
+    manifest {
+        attributes 'Implementation-Version': version
+        attributes 'Target-Platforms': 'win32-x86-64, linux-x86-64, darwin'
+    }
+
+    dependsOn sources
+}
+
+javadoc {
+    failOnError = false
+    options.encoding = 'UTF-8'
+    options.addStringOption('-html5') // jdk-9 docs
+
+    dependsOn sources
+    source = sources.destinationDir
+}
+
+task sourcesJar(type: Jar, dependsOn: classes) {
+    classifier = 'sources'
+    from "$buildDir/sources"
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+publishing {
+    publications {
+        MavenProject(MavenPublication) {
+            from components.java
+            groupId group
+            artifactId archivesBaseName
+            version version
+
+            artifact javadocJar
+            artifact sourcesJar
+        }
+    }
+}
+
+build {
+    dependsOn clean
+    dependsOn jar
+    dependsOn javadocJar
+    dependsOn sourcesJar
+    dependsOn shadowJar
+
+    jar.mustRunAfter clean
+    javadocJar.mustRunAfter jar
+    sourcesJar.mustRunAfter javadocJar
+    shadowJar.mustRunAfter sourcesJar
 }

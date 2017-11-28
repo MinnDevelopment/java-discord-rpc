@@ -33,24 +33,39 @@ typedef struct DiscordEventHandlers {
     void (*joinRequest)(const DiscordJoinRequest* request);
 } DiscordEventHandlers;
  */
-
+/**
+ * Struct containing handlers for RPC events
+ * <br>Provided handlers can be null.
+ */
 public class DiscordEventHandlers extends Structure
 {
+    /**
+     * Handler function for the ready event
+     */
     public interface OnReady extends Callback
     {
         void accept();
     }
 
+    /**
+     * Handler function for the exceptional events (error, disconnect)
+     */
     public interface OnStatus extends Callback
     {
         void accept(int errorCode, String message);
     }
 
+    /**
+     * Handler function for game update events (joinGame, spectateGame)
+     */
     public interface OnGameUpdate extends Callback
     {
         void accept(String secret);
     }
 
+    /**
+     * Handler function for user join requests
+     */
     public interface OnJoinRequest extends Callback
     {
         void accept(DiscordJoinRequest request);
@@ -65,11 +80,29 @@ public class DiscordEventHandlers extends Structure
        "joinRequest"
     ));
 
+    /**
+     * Called when the RPC connection has been established
+     */
     public OnReady ready;
+    /**
+     * Called when the RPC connection has been severed
+     */
     public OnStatus disconnected;
+    /**
+     * Called when an internal error is caught within the SDK
+     */
     public OnStatus errored;
+    /**
+     * Called when the logged in user joined a game
+     */
     public OnGameUpdate joinGame;
+    /**
+     * Called when the logged in user joined to spectate a game
+     */
     public OnGameUpdate spectateGame;
+    /**
+     * Called when another discord user wants to join the game of the logged in user
+     */
     public OnJoinRequest joinRequest;
 
     @Override
