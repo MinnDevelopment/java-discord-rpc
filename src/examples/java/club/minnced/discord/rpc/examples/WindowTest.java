@@ -20,6 +20,7 @@ public class WindowTest {
 		lib.Discord_Initialize(applicationId, handlers, true, steamId);
 		
 		presence.startTimestamp = System.currentTimeMillis() / 1000; // epoch second
+		presence.endTimestamp   = presence.startTimestamp + 20;
 		presence.details   = "Details here";
 		presence.state     = "State here";
 		presence.partySize = 1;
