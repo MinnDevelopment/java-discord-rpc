@@ -1,4 +1,4 @@
-package club.minnced.discord.rpc.examples;
+package ml.yuuki.chris.rpc.examples;
 
 import club.minnced.discord.rpc.*;
 
