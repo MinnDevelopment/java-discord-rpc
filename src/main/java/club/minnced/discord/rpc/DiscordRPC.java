@@ -88,7 +88,13 @@ public interface DiscordRPC extends Library
      */
     void Discord_RunCallbacks();
 
-    // TODO
+    /**
+     * Polls events from the RPC pipe and pushes the currently queued presence.
+     * <br>This will be performed automatically if the attached binary
+     * has an enabled IO thread (default)
+     * 
+     * <p><b>If the IO-Thread has been enabled this will not be supported!</b>
+     */
     void Discord_UpdateConnection();
 
     /**
@@ -122,7 +128,25 @@ public interface DiscordRPC extends Library
      */
     void Discord_Respond(String userid, int reply);
 
-    // TODO
+    /**
+     * Registers the given application so it can be run by the discord client. {@code discord-<appid>://}
+     * 
+     * @param applicationId
+     *        The ID of the application to register
+     * @param command
+     *        The command for the application startup, or {@code null} to use the
+     *        current executable's path
+     */
     void Discord_Register(String applicationId, String command);
+
+    /**
+     * Similar to {@link #Discord_Register(String, String)} but uses the steam 
+     * game's installation path.
+     * 
+     * @param applicationId
+     *        The ID of the application to register
+     * @param steamId
+     *        The steam ID for the game
+     */
     void Discord_RegisterSteamGame(String applicationId, String steamId);
 }
