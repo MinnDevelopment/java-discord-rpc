@@ -29,7 +29,9 @@ typedef struct DiscordJoinRequest {
     const char* avatar;
 } DiscordJoinRequest;
  */
-
+/**
+ * Struct binding for a discord join request.
+ */
 public class DiscordJoinRequest extends Structure
 {
     private static final List<String> FIELD_ORDER = Collections.unmodifiableList(Arrays.asList(
@@ -38,8 +40,17 @@ public class DiscordJoinRequest extends Structure
             "avatar"
     ));
 
+    /**
+     * The userId for the user that requests to join
+     */
     public String userId;
+    /**
+     * The username of the user that requests to join
+     */
     public String username;
+    /**
+     * The avatar of the user that requests to join
+     */
     public String avatar;
 
     @Override

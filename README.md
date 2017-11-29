@@ -1,15 +1,16 @@
 [ ![jitpack](https://jitpack.io/v/MinnDevelopment/Java-DiscordRPC.svg) ](https://jitpack.io/#MinnDevelopment/Java-DiscordRPC)
 # Java-DiscordRPC
 
-This library contains Java bindings for [Discord's official RPC SDK](https://github.com/discordapp/discord-rpc) using JNA. 
+This library contains Java bindings for [Discord's official RPC SDK](https://github.com/discordapp/discord-rpc) using JNA.
 
 This project provides binaries for `linux-x86-64`, `win32-x86-64` and `darwin`.
 
-If, on macOS, you get the following message:
-```
-Error in LSRegisterURL: -10811
-``` 
-it can safely be ignored.
+If, on macOS, you get the following message which can be ignored: `Error in LSRegisterURL: -10811`
+
+## Documentation
+
+You can see the official discord documentation in the [API Documentation](https://discordapp.com/developers/docs/rich-presence/how-to).
+<br>Alternatively you may visist the javadoc at [jitpack](https://jitpack.io/com/github/MinnDevelopment/Java-DiscordRPC/master-SNAPSHOT/javadoc/index.html).
 
 ## Examples
 
@@ -17,7 +18,6 @@ it can safely be ignored.
 import club.minnced.discord.rpc.*;
 
 public class Main {
-
     public static void main(String[] args) {
         DiscordRPC lib = DiscordRPC.INSTANCE;
         String applicationId = "";
@@ -39,12 +39,15 @@ public class Main {
             }
         }, "RPC-Callback-Handler").start();
     }
-
 }
 ```
 
+> Note: To reveal this presence you have to start a window for your application.
+
 ## License
+
 Java-DiscordRPC is licensed under the Apache 2.0 License. The base DiscordRPC is licensed under the MIT license.
 
 ## Contributing
+
 Find something that is lacking? Fork the project and pull request!
