@@ -2,3 +2,7 @@ src/test/*
 out/*
 build/*
 .idea/*
+.classpath
+.settings/*
+bin/*
+.project
