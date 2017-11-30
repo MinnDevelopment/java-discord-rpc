@@ -16,18 +16,19 @@
 plugins {
    id 'com.github.johnrengelman.shadow' version '2.0.1'
    id 'maven-publish'
+   id 'java'
+   id 'org.jetbrains.kotlin.jvm' version '1.2.0'
 }
 
 group 'club.minnced'
 version '1.2'
-
-apply plugin: 'java'
 
 sourceSets {
     examples {
         compileClasspath = main.output
         runtimeClasspath = main.output
         java.srcDirs = ['examples/java']
+        kotlin.srcDirs = ['examples/kotlin']
     }
 }
 
@@ -40,6 +41,7 @@ repositories {
 
 dependencies {
     compile 'net.java.dev.jna:jna:4.4.0'
+    examplesCompile 'org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.2.0'
     examplesCompile compileJava.classpath
 }
 
