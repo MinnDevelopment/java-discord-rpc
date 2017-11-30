@@ -27,7 +27,7 @@ sourceSets {
     examples {
         compileClasspath = main.output
         runtimeClasspath = main.output
-        java.srcDirs = ['examples']
+        java.srcDirs = ['examples/java']
     }
 }
 
