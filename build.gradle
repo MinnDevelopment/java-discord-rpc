@@ -37,10 +37,15 @@ targetCompatibility = 1.8
 
 repositories {
     jcenter()
+    maven {
+        url 'https://jitpack.io'
+        name 'jitpack'
+    }
 }
 
 dependencies {
     compile 'net.java.dev.jna:jna:4.4.0'
+    compile 'com.github.MinnDevelopment:discord-rpc-release:-SNAPSHOT'
     examplesCompile 'org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.2.0'
     examplesCompile compileJava.classpath
 }
