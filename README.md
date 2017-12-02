@@ -7,8 +7,6 @@ This library contains Java bindings for [Discord's official RPC SDK](https://git
 This project provides binaries for `linux-x86-64`, `win32-x86-64`, `win32-x86`, and `darwin`.
 The binaries can be found at [MinnDevelopment/discord-rpc-release](https://github.com/MinnDevelopment/discord-rpc-release)
 
-If, on macOS, you get the following message which can be ignored: `Error in LSRegisterURL: -10811`
-
 ## Documentation
 
 You can see the official discord documentation in the [API Documentation](https://discordapp.com/developers/docs/rich-presence/how-to).
@@ -18,7 +16,7 @@ You can see the official discord documentation in the [API Documentation](https:
 
 ### Basics
 
-The library can be used just like SDK. This means you can almost copy the exact code used in the official documentation.
+The library can be used just like the SDK. This means you can almost copy the exact code used in the official documentation.
 
 ```java
 import club.minnced.discord.rpc.*;
