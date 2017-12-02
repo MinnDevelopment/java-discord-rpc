@@ -21,7 +21,7 @@ plugins {
 }
 
 group 'club.minnced'
-version '1.3'
+version '1.3.0'
 
 sourceSets {
     examples {
@@ -32,8 +32,7 @@ sourceSets {
     }
 }
 
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
+sourceCompatibility = targetCompatibility = JavaVersion.VERSION_1_8
 
 repositories {
     jcenter()
@@ -67,7 +66,7 @@ jar {
     baseName = project.name
     manifest {
         attributes 'Implementation-Version': version
-        attributes 'Target-Platforms': 'win32-x86-64, linux-x86-64, darwin'
+        attributes 'Target-Platforms': 'win32-x86-64, win32-x86, linux-x86-64, darwin'
     }
 
     dependsOn sources
