@@ -25,6 +25,7 @@ import com.sun.jna.Native;
  * 
  * <h1>Supported Architectures</h1>
  * <ul>
+ *   <li>Windows x86</li>
  *   <li>Windows x86-64</li>
  *   <li>Linux x86-64</li>
  *   <li>Darwin</li>
