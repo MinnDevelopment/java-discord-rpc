@@ -37,6 +37,7 @@ public class DiscordJoinRequest extends Structure
     private static final List<String> FIELD_ORDER = Collections.unmodifiableList(Arrays.asList(
             "userId",
             "username",
+            "discriminator",
             "avatar"
     ));
 
@@ -44,10 +45,17 @@ public class DiscordJoinRequest extends Structure
      * The userId for the user that requests to join
      */
     public String userId;
+
     /**
      * The username of the user that requests to join
      */
     public String username;
+
+    /**
+     * The discriminator of the user that requests to join
+     */
+    public String discriminator;
+
     /**
      * The avatar of the user that requests to join
      */
