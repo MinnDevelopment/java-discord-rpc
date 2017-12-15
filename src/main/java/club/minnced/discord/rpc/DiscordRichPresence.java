@@ -184,9 +184,7 @@ public class DiscordRichPresence extends Structure
     {
         if (this == o)
             return true;
-        if (o == null || getClass() != o.getClass())
-            return false;
-        if (!super.equals(o))
+        if (!(o instanceof DiscordRichPresence))
             return false;
         DiscordRichPresence presence = (DiscordRichPresence) o;
         return startTimestamp == presence.startTimestamp

@@ -111,12 +111,15 @@ public class DiscordEventHandlers extends Structure
     {
         if (this == o)
             return true;
-        if (o == null || getClass() != o.getClass())
-            return false;
-        if (!super.equals(o))
+        if (!(o instanceof DiscordEventHandlers))
             return false;
         DiscordEventHandlers that = (DiscordEventHandlers) o;
-        return Objects.equals(ready, that.ready) && Objects.equals(disconnected, that.disconnected) && Objects.equals(errored, that.errored) && Objects.equals(joinGame, that.joinGame) && Objects.equals(spectateGame, that.spectateGame) && Objects.equals(joinRequest, that.joinRequest);
+        return Objects.equals(ready, that.ready)
+                && Objects.equals(disconnected, that.disconnected)
+                && Objects.equals(errored, that.errored)
+                && Objects.equals(joinGame, that.joinGame)
+                && Objects.equals(spectateGame, that.spectateGame)
+                && Objects.equals(joinRequest, that.joinRequest);
     }
 
     @Override

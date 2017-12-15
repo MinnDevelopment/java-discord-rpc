@@ -67,9 +67,7 @@ public class DiscordJoinRequest extends Structure
     {
         if (this == o)
             return true;
-        if (o == null || getClass() != o.getClass())
-            return false;
-        if (!super.equals(o))
+        if (!(o instanceof DiscordJoinRequest))
             return false;
         DiscordJoinRequest that = (DiscordJoinRequest) o;
         return Objects.equals(userId, that.userId)
