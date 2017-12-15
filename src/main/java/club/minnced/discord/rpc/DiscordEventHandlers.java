@@ -22,6 +22,7 @@ import com.sun.jna.Structure;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 /*
 typedef struct DiscordEventHandlers {
@@ -104,6 +105,28 @@ public class DiscordEventHandlers extends Structure
      * Called when another discord user wants to join the game of the logged in user
      */
     public OnJoinRequest joinRequest;
+
+    @Override
+    public boolean equals(Object o)
+    {
+        if (this == o)
+            return true;
+        if (!(o instanceof DiscordEventHandlers))
+            return false;
+        DiscordEventHandlers that = (DiscordEventHandlers) o;
+        return Objects.equals(ready, that.ready)
+                && Objects.equals(disconnected, that.disconnected)
+                && Objects.equals(errored, that.errored)
+                && Objects.equals(joinGame, that.joinGame)
+                && Objects.equals(spectateGame, that.spectateGame)
+                && Objects.equals(joinRequest, that.joinRequest);
+    }
+
+    @Override
+    public int hashCode()
+    {
+        return Objects.hash(ready, disconnected, errored, joinGame, spectateGame, joinRequest);
+    }
 
     @Override
     protected List<String> getFieldOrder()

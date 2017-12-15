@@ -21,6 +21,7 @@ import com.sun.jna.Structure;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 /*
 typedef struct DiscordJoinRequest {
@@ -60,6 +61,26 @@ public class DiscordJoinRequest extends Structure
      * The avatar of the user that requests to join
      */
     public String avatar;
+
+    @Override
+    public boolean equals(Object o)
+    {
+        if (this == o)
+            return true;
+        if (!(o instanceof DiscordJoinRequest))
+            return false;
+        DiscordJoinRequest that = (DiscordJoinRequest) o;
+        return Objects.equals(userId, that.userId)
+                && Objects.equals(username, that.username)
+                && Objects.equals(discriminator, that.discriminator)
+                && Objects.equals(avatar, that.avatar);
+    }
+
+    @Override
+    public int hashCode()
+    {
+        return Objects.hash(userId, username, discriminator, avatar);
+    }
 
     @Override
     protected List<String> getFieldOrder()
