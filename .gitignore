@@ -7,3 +7,7 @@ build/*
 bin/*
 .project
 .gradle/*
+.idea/
+.settings/
+build/
+discord-rpc.iml
