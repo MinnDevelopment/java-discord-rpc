@@ -21,7 +21,7 @@ plugins {
 }
 
 group 'club.minnced'
-version '1.3.1'
+version '1.3.2'
 
 sourceSets {
     examples {
