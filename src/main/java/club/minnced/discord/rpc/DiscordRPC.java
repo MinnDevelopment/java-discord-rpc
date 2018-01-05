@@ -19,6 +19,9 @@ package club.minnced.discord.rpc;
 import com.sun.jna.Library;
 import com.sun.jna.Native;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 /**
  * Core library binding for the official <a href="https://github.com/discordapp/discord-rpc" target="_blank">Discord RPC SDK</a>.
  * <br>Use {@link #INSTANCE} to access this library.
@@ -71,9 +74,9 @@ public interface DiscordRPC extends Library
      *        Possible steam ID of the running game
      */
     void Discord_Initialize(String applicationId,
-                            DiscordEventHandlers handlers,
+                            @Nullable DiscordEventHandlers handlers,
                             boolean autoRegister,
-                            String steamId);
+                            @Nullable String steamId);
     
     /**
      * Shuts the RPC connection down.
@@ -104,11 +107,11 @@ public interface DiscordRPC extends Library
      * and queues all additional presence updates.
      * 
      * @param struct
-     *        The new presence to use, or null to reset
+     *        The new presence to use
      * 
      * @see club.minnced.discord.rpc.DiscordRichPresence
      */
-    void Discord_UpdatePresence(DiscordRichPresence struct);
+    void Discord_UpdatePresence(@Nonnull DiscordRichPresence struct);
 
     /**
      * Responds to the given user with the specified reply type.
@@ -127,7 +130,7 @@ public interface DiscordRPC extends Library
      * 
      * @see   club.minnced.discord.rpc.DiscordJoinRequest#userId DiscordJoinRequest.userId
      */
-    void Discord_Respond(String userid, int reply);
+    void Discord_Respond(@Nonnull String userid, int reply);
 
     /**
      * Registers the given application so it can be run by the discord client. {@code discord-<appid>://}

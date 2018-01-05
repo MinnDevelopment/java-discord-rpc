@@ -45,6 +45,7 @@ repositories {
 dependencies {
     compile 'net.java.dev.jna:jna:4.4.0'
     compile 'com.github.MinnDevelopment:discord-rpc-release:-SNAPSHOT'
+    compileOnly 'com.google.code.findbugs:jsr305:3.0.2'
     examplesCompile 'org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.2.0'
     examplesCompile compileJava.classpath
 }
