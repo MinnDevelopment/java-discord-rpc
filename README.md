@@ -1,4 +1,4 @@
-# Java-DiscordRPC
+# java-discord-rpc
 
 [![](https://jitpack.io/v/MinnDevelopment/java-discord-rpc.svg)](https://jitpack.io/#MinnDevelopment/java-discord-rpc)
 
