@@ -1,6 +1,6 @@
 # Java-DiscordRPC
 
-[![](https://jitpack.io/v/MinnDevelopment/Java-DiscordRPC.svg)](https://jitpack.io/#MinnDevelopment/Java-DiscordRPC)
+[![](https://jitpack.io/v/MinnDevelopment/java-discord-rpc.svg)](https://jitpack.io/#MinnDevelopment/java-discord-rpc)
 
 This library contains Java bindings for [Discord's official RPC SDK](https://github.com/discordapp/discord-rpc) using JNA.
 
@@ -10,7 +10,7 @@ The binaries can be found at [MinnDevelopment/discord-rpc-release](https://githu
 ## Documentation
 
 You can see the official discord documentation in the [API Documentation](https://discordapp.com/developers/docs/rich-presence/how-to).
-<br>Alternatively you may visist the javadoc at [jitpack](https://jitpack.io/com/github/MinnDevelopment/Java-DiscordRPC/master-SNAPSHOT/javadoc/index.html).
+<br>Alternatively you may visist the javadoc at [jitpack](https://jitpack.io/com/github/MinnDevelopment/java-discord-rpc/master-SNAPSHOT/javadoc/index.html).
 
 ## Examples
 
@@ -48,7 +48,7 @@ public class Main {
 
 ### Community Examples
 
-If you want to add an example to the [example directory](https://github.com/MinnDevelopment/Java-DiscordRPC/tree/master/examples)
+If you want to add an example to the [example directory](https://github.com/MinnDevelopment/java-discord-rpc/tree/master/examples)
 you can do so by making a PR with your package and source.
 All I ask from you is that the example does not abuse the API in any way and that your example can compile.
 If you would like to add examples in other JVM languages you must first add support via the `build.gradle` file.
@@ -57,7 +57,7 @@ For example, `examples/java/club/minnced/rpc/examples/MyGame.java` would be your
 
 ## License
 
-Java-DiscordRPC is licensed under the Apache 2.0 License. The base DiscordRPC is licensed under the MIT license.
+java-discord-rpc is licensed under the Apache 2.0 License. The base DiscordRPC is licensed under the MIT license.
 
 ## Contributing
 
