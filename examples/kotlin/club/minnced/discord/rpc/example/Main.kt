@@ -26,7 +26,7 @@ fun main(args: Array<String>) {
 
         Discord_Initialize(applicationId, handlers, true, steamId)
 
-        Discord_UpdatePresence( presence {
+        presence {
             details = "Undisclosed"
             state = "Free 4 All"
             startTimestamp = System.currentTimeMillis() / 1000
@@ -35,7 +35,7 @@ fun main(args: Array<String>) {
             largeImageText = "Desert"
             smallImageKey = "char-robert"
             smallImageText = "Robert"
-        })
+        }
 
         thread(name="RPC-Callback-Handler") {
             while (!Thread.currentThread().isInterrupted) {
@@ -49,4 +49,6 @@ fun main(args: Array<String>) {
 
 fun discord(block: DiscordRPC.() -> Unit) = DiscordRPC.INSTANCE.apply(block)
 fun handlers(block: DiscordEventHandlers.() -> Unit) = DiscordEventHandlers().apply(block)
-fun presence(block: DiscordRichPresence.() -> Unit) = DiscordRichPresence().apply(block)
+fun DiscordRPC.presence(block: DiscordRichPresence.() -> Unit) {
+    Discord_UpdatePresence(DiscordRichPresence().apply(block))
+}

@@ -114,6 +114,11 @@ public interface DiscordRPC extends Library
     void Discord_UpdatePresence(@Nonnull DiscordRichPresence struct);
 
     /**
+     * Clears the currently set presence.
+     */
+    void Discord_ClearPresence();
+
+    /**
      * Responds to the given user with the specified reply type.
      * 
      * <h1>Possible Replies</h1>
