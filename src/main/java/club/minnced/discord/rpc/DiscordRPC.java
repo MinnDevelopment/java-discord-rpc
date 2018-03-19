@@ -73,7 +73,7 @@ public interface DiscordRPC extends Library
      * @param steamId
      *        Possible steam ID of the running game
      */
-    void Discord_Initialize(String applicationId,
+    void Discord_Initialize(@Nonnull String applicationId,
                             @Nullable DiscordEventHandlers handlers,
                             boolean autoRegister,
                             @Nullable String steamId);
@@ -111,7 +111,7 @@ public interface DiscordRPC extends Library
      * 
      * @see club.minnced.discord.rpc.DiscordRichPresence
      */
-    void Discord_UpdatePresence(@Nonnull DiscordRichPresence struct);
+    void Discord_UpdatePresence(@Nullable DiscordRichPresence struct);
 
     /**
      * Clears the currently set presence.
@@ -136,6 +136,14 @@ public interface DiscordRPC extends Library
      * @see   club.minnced.discord.rpc.DiscordJoinRequest#userId DiscordJoinRequest.userId
      */
     void Discord_Respond(@Nonnull String userid, int reply);
+
+    /**
+     * Updates the registered event handlers to the provided struct.
+     *
+     * @param handlers
+     *        The handlers to update to, or null
+     */
+    void Discord_UpdateHanlders(@Nullable DiscordEventHandlers handlers);
 
     /**
      * Registers the given application so it can be run by the discord client. {@code discord-<appid>://}
