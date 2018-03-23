@@ -143,7 +143,7 @@ public interface DiscordRPC extends Library
      * @param handlers
      *        The handlers to update to, or null
      */
-    void Discord_UpdateHanlders(@Nullable DiscordEventHandlers handlers);
+    void Discord_UpdateHandlers(@Nullable DiscordEventHandlers handlers);
 
     /**
      * Registers the given application so it can be run by the discord client. {@code discord-<appid>://}
