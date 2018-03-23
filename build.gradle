@@ -21,7 +21,7 @@ plugins {
 }
 
 group 'club.minnced'
-version '1.3.4'
+version '1.3.5'
 
 sourceSets {
     examples {
@@ -44,7 +44,7 @@ repositories {
 
 dependencies {
     compile 'net.java.dev.jna:jna:4.4.0'
-    compile 'com.github.MinnDevelopment:discord-rpc-release:v3.0.0'
+    compile 'com.github.MinnDevelopment:discord-rpc-release:v3.1.0'
     compileOnly 'com.google.code.findbugs:jsr305:3.0.2'
     examplesCompile 'org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.2.0'
     examplesCompile compileJava.classpath
