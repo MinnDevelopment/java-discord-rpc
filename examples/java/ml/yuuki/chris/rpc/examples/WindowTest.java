@@ -11,6 +11,10 @@ public class WindowTest {
 	public static void main(String args[]) {
 		DiscordRPC lib = DiscordRPC.INSTANCE;
 		DiscordRichPresence presence = new DiscordRichPresence();
+		if (args.length == 0) {
+			System.err.println("You must specify an application ID in the arguments!");
+			System.exit(-1);
+		}
 		String applicationId = args.length < 1 ? "" : args[0];
 		String steamId       = args.length < 2 ? "" : args[1];
 		
@@ -56,22 +60,26 @@ public class WindowTest {
 		// Details
 		JLabel detailsLabel = new JLabel("Details");
 		detailsLabel.setHorizontalAlignment(SwingConstants.RIGHT);
-		JTextField detailsText = new JTextField("Discord RPC");
+		JTextField detailsText = new JTextField(presence.details);
 		
 		JLabel stateLabel = new JLabel("State");
 		stateLabel.setHorizontalAlignment(SwingConstants.RIGHT);
-		JTextField stateText = new JTextField("Testing Minn's library");
+		JTextField stateText = new JTextField(presence.state);
 		
-		JTextField partySizeText = new JTextField("1");
+		JTextField partySizeText = new JTextField(String.valueOf(presence.partySize));
 		JLabel partyLabel = new JLabel("of"); partyLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		JTextField partyMaxText = new JTextField("4");
+		JTextField partyMaxText = new JTextField(String.valueOf(presence.partyMax));
 		
 		JButton submit = new JButton("Update Presence");
 		submit.addActionListener(e -> {
 			presence.details = detailsText.getText();
 			presence.state   = stateText.getText();
-			try { presence.partySize = Integer.parseInt(partySizeText.getText()); } catch (Exception ignored) {}
-			try { presence.partyMax  = Integer.parseInt(partyMaxText.getText());  } catch (Exception ignored) {} // if text isn't a number, ignore it
+			try {
+				presence.partySize = Integer.parseInt(partySizeText.getText());
+			} catch (Exception ignored) {}
+			try {
+				presence.partyMax  = Integer.parseInt(partyMaxText.getText());
+			} catch (Exception ignored) {} // if text isn't a number, ignore it
 			
 			lib.Discord_UpdatePresence(presence);
 		});
