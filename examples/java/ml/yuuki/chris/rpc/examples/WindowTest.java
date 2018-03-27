@@ -9,12 +9,12 @@ import java.awt.event.*;
 public class WindowTest {
 
 	public static void main(String args[]) {
-		DiscordRPC lib = DiscordRPC.INSTANCE;
-		DiscordRichPresence presence = new DiscordRichPresence();
 		if (args.length == 0) {
 			System.err.println("You must specify an application ID in the arguments!");
 			System.exit(-1);
 		}
+		DiscordRPC lib = DiscordRPC.INSTANCE;
+		DiscordRichPresence presence = new DiscordRichPresence();
 		String applicationId = args.length < 1 ? "" : args[0];
 		String steamId       = args.length < 2 ? "" : args[1];
 		
