@@ -16,8 +16,11 @@
 
 package club.minnced.discord.rpc;
 
+import com.sun.jna.Memory;
+import com.sun.jna.Pointer;
 import com.sun.jna.Structure;
 
+import java.nio.charset.Charset;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -68,18 +71,32 @@ public class DiscordRichPresence extends Structure
     /**
      * The user's current party status.
      * <br>Example: "Looking to Play", "Playing Solo", "In a Group"
-     * 
+     *
      * <p><b>Maximum: 128 characters</b>
      */
-    public String state;
+    private Pointer state;
+
+    public void setState(String state){
+        byte[] arr=state.getBytes(Charset.forName("UTF-8"));
+        this.state = new Memory(arr.length+1);
+        this.state.write(0,arr,0,arr.length);
+        this.state.setByte(arr.length, (byte) 0);
+    }
 
     /**
      * What the player is currently doing.
      * <br>Example: "Competitive - Captain's Mode", "In Queue", "Unranked PvP"
-     * 
+     *
      * <p><b>Maximum: 128 characters</b>
      */
-    public String details;
+    private Pointer details;
+
+    public void setDetails(String state){
+        byte[] arr=state.getBytes(Charset.forName("UTF-8"));
+        this.details = new Memory(arr.length+1);
+        this.details.write(0,arr,0,arr.length);
+        this.details.setByte(arr.length, (byte) 0);
+    }
 
     /**
      * Unix timestamp (seconds) for the start of the game.
@@ -96,7 +113,7 @@ public class DiscordRichPresence extends Structure
     /**
      * Name of the uploaded image for the large profile artwork.
      * <br>Example: "default"
-     * 
+     *
      * <p><b>Maximum: 32 characters</b>
      */
     public String largeImageKey;
@@ -104,15 +121,22 @@ public class DiscordRichPresence extends Structure
     /**
      * Tooltip for the largeImageKey.
      * <br>Example: "Blade's Edge Arena", "Numbani", "Danger Zone"
-     * 
+     *
      * <p><b>Maximum: 128 characters</b>
      */
-    public String largeImageText;
+    private Pointer largeImageText;
+
+    public void setLargeImageText(String largeImageText){
+        byte[] arr=largeImageText.getBytes(Charset.forName("UTF-8"));
+        this.largeImageText = new Memory(arr.length+1);
+        this.largeImageText.write(0,arr,0,arr.length);
+        this.largeImageText.setByte(arr.length, (byte) 0);
+    }
 
     /**
      * Name of the uploaded image for the small profile artwork.
      * <br>Example: "rogue"
-     * 
+     *
      * <p><b>Maximum: 32 characters</b>
      */
     public String smallImageKey;
@@ -120,15 +144,22 @@ public class DiscordRichPresence extends Structure
     /**
      * Tooltip for the smallImageKey.
      * <br>Example: "Rogue - Level 100"
-     * 
+     *
      * <p><b>Maximum: 128 characters</b>
      */
-    public String smallImageText;
+    private Pointer smallImageText;
+
+    public void setSmallImageText(String smallImageText){
+        byte[] arr=smallImageText.getBytes(Charset.forName("UTF-8"));
+        this.smallImageText = new Memory(arr.length+1);
+        this.smallImageText.write(0,arr,0,arr.length);
+        this.smallImageText.setByte(arr.length, (byte) 0);
+    }
 
     /**
      * ID of the player's party, lobby, or group.
      * <br>Example: "ae488379-351d-4a4f-ad32-2b9b01c91657"
-     * 
+     *
      * <p><b>Maximum: 128 characters</b>
      */
     public String partyId;
@@ -149,7 +180,7 @@ public class DiscordRichPresence extends Structure
      * Unique hashed string for Spectate and Join.
      * Required to enable match interactive buttons in the user's presence.
      * <br>Example: "MmhuZToxMjMxMjM6cWl3amR3MWlqZA=="
-     * 
+     *
      * <p><b>Maximum: 128 characters</b>
      */
     public String matchSecret;
@@ -158,7 +189,7 @@ public class DiscordRichPresence extends Structure
      * Unique hashed string for Spectate button.
      * This will enable the "Spectate" button on the user's presence if whitelisted.
      * <br>Example: "MTIzNDV8MTIzNDV8MTMyNDU0"
-     * 
+     *
      * <p><b>Maximum: 128 characters</b>
      */
     public String joinSecret;
@@ -167,7 +198,7 @@ public class DiscordRichPresence extends Structure
      * Unique hashed string for chat invitations and Ask to Join.
      * This will enable the "Ask to Join" button on the user's presence if whitelisted.
      * <br>Example: "MTI4NzM0OjFpMmhuZToxMjMxMjM="
-     * 
+     *
      * <p><b>Maximum: 128 characters</b>
      */
     public String spectateSecret;
