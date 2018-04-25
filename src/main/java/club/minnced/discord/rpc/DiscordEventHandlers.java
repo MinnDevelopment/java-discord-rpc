@@ -26,12 +26,12 @@ import java.util.Objects;
 
 /*
 typedef struct DiscordEventHandlers {
-    void (*ready)();
+    void (*ready)(DiscordUser*);
     void (*disconnected)(int errorCode, const char* message);
     void (*errored)(int errorCode, const char* message);
     void (*joinGame)(const char* joinSecret);
     void (*spectateGame)(const char* spectateSecret);
-    void (*joinRequest)(const DiscordJoinRequest* request);
+    void (*joinRequest)(const DiscordUser* request);
 } DiscordEventHandlers;
  */
 /**
@@ -45,7 +45,7 @@ public class DiscordEventHandlers extends Structure
      */
     public interface OnReady extends Callback
     {
-        void accept();
+        void accept(DiscordUser user);
     }
 
     /**
@@ -69,7 +69,7 @@ public class DiscordEventHandlers extends Structure
      */
     public interface OnJoinRequest extends Callback
     {
-        void accept(DiscordJoinRequest request);
+        void accept(DiscordUser request);
     }
 
     private static final List<String> FIELD_ORDER = Collections.unmodifiableList(Arrays.asList(

@@ -24,16 +24,16 @@ import java.util.List;
 import java.util.Objects;
 
 /*
-typedef struct DiscordJoinRequest {
+typedef struct DiscordUser {
     const char* userId;
     const char* username;
     const char* avatar;
-} DiscordJoinRequest;
+} DiscordUser;
  */
 /**
  * Struct binding for a discord join request.
  */
-public class DiscordJoinRequest extends Structure
+public class DiscordUser extends Structure
 {
     private static final List<String> FIELD_ORDER = Collections.unmodifiableList(Arrays.asList(
             "userId",
@@ -67,9 +67,9 @@ public class DiscordJoinRequest extends Structure
     {
         if (this == o)
             return true;
-        if (!(o instanceof DiscordJoinRequest))
+        if (!(o instanceof DiscordUser))
             return false;
-        DiscordJoinRequest that = (DiscordJoinRequest) o;
+        DiscordUser that = (DiscordUser) o;
         return Objects.equals(userId, that.userId)
                 && Objects.equals(username, that.username)
                 && Objects.equals(discriminator, that.discriminator)

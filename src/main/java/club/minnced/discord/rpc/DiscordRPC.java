@@ -133,7 +133,7 @@ public interface DiscordRPC extends Library
      * @param reply
      *        The reply type
      * 
-     * @see   club.minnced.discord.rpc.DiscordJoinRequest#userId DiscordJoinRequest.userId
+     * @see   club.minnced.discord.rpc.DiscordUser#userId DiscordUser.userId
      */
     void Discord_Respond(@Nonnull String userid, int reply);
 
