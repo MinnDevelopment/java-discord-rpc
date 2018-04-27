@@ -19,7 +19,7 @@ public class WindowTest {
 		String steamId       = args.length < 2 ? "" : args[1];
 		
 		DiscordEventHandlers handlers = new DiscordEventHandlers();
-		handlers.ready = () -> System.out.println("Ready!");
+		handlers.ready = (user) -> System.out.println("Ready!");
 		
 		lib.Discord_Initialize(applicationId, handlers, true, steamId);
 		

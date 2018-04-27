@@ -27,7 +27,7 @@ public class Main {
         String applicationId = "";
         String steamId = "";
         DiscordEventHandlers handlers = new DiscordEventHandlers();
-        handlers.ready = () -> System.out.println("Ready!");
+        handlers.ready = (user) -> System.out.println("Ready!");
         lib.Discord_Initialize(applicationId, handlers, true, steamId);
         DiscordRichPresence presence = new DiscordRichPresence();
         presence.startTimestamp = System.currentTimeMillis() / 1000; // epoch second
