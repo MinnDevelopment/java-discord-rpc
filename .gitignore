@@ -11,3 +11,4 @@ bin/*
 .settings/
 build/
 discord-rpc.iml
+gradle.properties

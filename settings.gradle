@@ -14,5 +14,5 @@
  * limitations under the License.
  */
 
-rootProject.name = 'discord-rpc'
+rootProject.name = 'java-discord-rpc'
 

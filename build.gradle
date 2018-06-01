@@ -14,10 +14,11 @@
  * limitations under the License.
  */
 plugins {
-   id 'com.github.johnrengelman.shadow' version '2.0.1'
-   id 'maven-publish'
-   id 'java'
-   id 'org.jetbrains.kotlin.jvm' version '1.2.0'
+    id 'java-library'
+    id 'maven-publish'
+    id 'com.jfrog.bintray' version '1.7.3'
+    id 'org.jetbrains.kotlin.jvm' version '1.2.0'
+    id 'com.github.johnrengelman.shadow' version '2.0.1'
 }
 
 group 'club.minnced'
@@ -36,22 +37,23 @@ sourceCompatibility = targetCompatibility = JavaVersion.VERSION_1_8
 
 repositories {
     jcenter()
-    maven {
-        url 'https://jitpack.io'
-        name 'jitpack'
-    }
 }
 
 dependencies {
-    compile 'net.java.dev.jna:jna:4.4.0'
-    compile 'club.minnced:discord-rpc-release:v3.3.0'
+    api 'net.java.dev.jna:jna:4.4.0'
+    implementation 'club.minnced:discord-rpc-release:v3.3.0'
     compileOnly 'com.google.code.findbugs:jsr305:3.0.2'
     examplesCompile 'org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.2.0'
     examplesCompile compileJava.classpath
 }
 
 wrapper {
-    gradleVersion = '4.2.1'
+    gradleVersion = '4.6'
+}
+
+tasks.withType(JavaCompile) {
+    options.incremental = true
+    options.encoding = 'UTF-8'
 }
 
 // Publishing
@@ -75,6 +77,7 @@ jar {
 
 javadoc {
     failOnError = false
+    options.author()
     options.encoding = 'UTF-8'
     options.addStringOption('-html5') // jdk-9 docs
 
@@ -92,9 +95,44 @@ task javadocJar(type: Jar, dependsOn: javadoc) {
     from javadoc.destinationDir
 }
 
+bintray {
+    user = bintrayUsername
+    key = bintrayApiKey
+    publications = ["BintrayRelease"]
+    pkg {
+        repo = 'maven'
+        name = project.name
+        licenses = ['Apache-2.0']
+        vcsUrl = 'https://github.com/MinnDevelopment/java-discord-rpc.git'
+        githubRepo = 'MinnDevelopment/java-discord-rpc'
+        publish = true
+        version {
+            name = project.version
+            vcsTag = project.version
+            released = new Date()
+            gpg {
+                sign = true
+            }
+        }
+    }
+}
+
+bintrayUpload {
+    dependsOn clean
+    dependsOn build
+    build.mustRunAfter clean
+
+    onlyIf { !getProjectProperty('bintrayUsername').empty }
+    onlyIf { !getProjectProperty('bintrayApiKey').empty }
+}
+
+def getProjectProperty(String key) {
+    return hasProperty(key) ? this.properties[key] : ''
+}
+
 publishing {
     publications {
-        MavenProject(MavenPublication) {
+        BintrayRelease(MavenPublication) {
             from components.java
             groupId group
             artifactId archivesBaseName
@@ -107,7 +145,6 @@ publishing {
 }
 
 build {
-    dependsOn clean
     dependsOn jar
     dependsOn javadocJar
     dependsOn sourcesJar
