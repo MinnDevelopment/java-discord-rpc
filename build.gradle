@@ -24,6 +24,20 @@ plugins {
 group 'club.minnced'
 version '2.0.0'
 
+publishing {
+    publications {
+        BintrayRelease(MavenPublication) {
+            from components.java
+            groupId group
+            artifactId archivesBaseName
+            version version
+
+            artifact javadocJar
+            artifact sourcesJar
+        }
+    }
+}
+
 sourceSets {
     examples {
         compileClasspath = main.output
@@ -128,20 +142,6 @@ bintrayUpload {
 
 def getProjectProperty(String key) {
     return hasProperty(key) ? this.properties[key] : ''
-}
-
-publishing {
-    publications {
-        BintrayRelease(MavenPublication) {
-            from components.java
-            groupId group
-            artifactId archivesBaseName
-            version version
-
-            artifact javadocJar
-            artifact sourcesJar
-        }
-    }
 }
 
 build {
