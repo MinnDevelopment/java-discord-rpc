@@ -42,6 +42,7 @@ typedef struct DiscordRichPresence {
     int8_t instance;
 } DiscordRichPresence;
  */
+
 /**
  * Struct binding for a RichPresence
  */
@@ -64,6 +65,15 @@ public class DiscordRichPresence extends Structure
             "spectateSecret",
             "instance"
     ));
+
+    public DiscordRichPresence(String encoding) {
+        super();
+        setStringEncoding(encoding);
+    }
+
+    public DiscordRichPresence() {
+        this("UTF-8");
+    }
 
     /**
      * The user's current party status.

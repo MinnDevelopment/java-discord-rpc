@@ -27,9 +27,11 @@ import java.util.Objects;
 typedef struct DiscordUser {
     const char* userId;
     const char* username;
+    const char* discriminator;
     const char* avatar;
 } DiscordUser;
  */
+
 /**
  * Struct binding for a discord join request.
  */
@@ -41,6 +43,15 @@ public class DiscordUser extends Structure
             "discriminator",
             "avatar"
     ));
+
+    public DiscordUser(String encoding) {
+        super();
+        setStringEncoding(encoding);
+    }
+
+    public DiscordUser() {
+        this("UTF-8");
+    }
 
     /**
      * The userId for the user that requests to join
