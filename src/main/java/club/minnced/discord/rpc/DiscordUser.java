@@ -16,11 +16,6 @@
 
 package club.minnced.discord.rpc;
 
-import com.sun.jna.Structure;
-
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 import java.util.Objects;
 
 /*
@@ -35,24 +30,8 @@ typedef struct DiscordUser {
 /**
  * Struct binding for a discord join request.
  */
-public class DiscordUser extends Structure
+public class DiscordUser
 {
-    private static final List<String> FIELD_ORDER = Collections.unmodifiableList(Arrays.asList(
-            "userId",
-            "username",
-            "discriminator",
-            "avatar"
-    ));
-
-    public DiscordUser(String encoding) {
-        super();
-        setStringEncoding(encoding);
-    }
-
-    public DiscordUser() {
-        this("UTF-8");
-    }
-
     /**
      * The userId for the user that requests to join
      */
@@ -91,11 +70,5 @@ public class DiscordUser extends Structure
     public int hashCode()
     {
         return Objects.hash(userId, username, discriminator, avatar);
-    }
-
-    @Override
-    protected List<String> getFieldOrder()
-    {
-        return FIELD_ORDER;
     }
 }

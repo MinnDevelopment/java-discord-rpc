@@ -17,11 +17,7 @@
 package club.minnced.discord.rpc;
 
 import com.sun.jna.Callback;
-import com.sun.jna.Structure;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 import java.util.Objects;
 
 /*
@@ -38,7 +34,7 @@ typedef struct DiscordEventHandlers {
  * Struct containing handlers for RPC events
  * <br>Provided handlers can be null.
  */
-public class DiscordEventHandlers extends Structure
+public class DiscordEventHandlers
 {
     /**
      * Handler function for the ready event
@@ -71,15 +67,6 @@ public class DiscordEventHandlers extends Structure
     {
         void accept(DiscordUser request);
     }
-
-    private static final List<String> FIELD_ORDER = Collections.unmodifiableList(Arrays.asList(
-       "ready",
-       "disconnected",
-       "errored",
-       "joinGame",
-       "spectateGame",
-       "joinRequest"
-    ));
 
     /**
      * Called when the RPC connection has been established
@@ -126,11 +113,5 @@ public class DiscordEventHandlers extends Structure
     public int hashCode()
     {
         return Objects.hash(ready, disconnected, errored, joinGame, spectateGame, joinRequest);
-    }
-
-    @Override
-    protected List<String> getFieldOrder()
-    {
-        return FIELD_ORDER;
     }
 }

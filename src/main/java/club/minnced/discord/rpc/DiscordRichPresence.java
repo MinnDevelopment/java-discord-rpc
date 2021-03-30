@@ -16,11 +16,6 @@
 
 package club.minnced.discord.rpc;
 
-import com.sun.jna.Structure;
-
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 import java.util.Objects;
 
 /*
@@ -46,35 +41,8 @@ typedef struct DiscordRichPresence {
 /**
  * Struct binding for a RichPresence
  */
-public class DiscordRichPresence extends Structure
+public class DiscordRichPresence
 {
-    private static final List<String> FIELD_ORDER = Collections.unmodifiableList(Arrays.asList(
-            "state",
-            "details",
-            "startTimestamp",
-            "endTimestamp",
-            "largeImageKey",
-            "largeImageText",
-            "smallImageKey",
-            "smallImageText",
-            "partyId",
-            "partySize",
-            "partyMax",
-            "matchSecret",
-            "joinSecret",
-            "spectateSecret",
-            "instance"
-    ));
-
-    public DiscordRichPresence(String encoding) {
-        super();
-        setStringEncoding(encoding);
-    }
-
-    public DiscordRichPresence() {
-        this("UTF-8");
-    }
-
     /**
      * The user's current party status.
      * <br>Example: "Looking to Play", "Playing Solo", "In a Group"
@@ -219,11 +187,5 @@ public class DiscordRichPresence extends Structure
     {
         return Objects.hash(state, details, startTimestamp, endTimestamp, largeImageKey, largeImageText, smallImageKey,
                 smallImageText, partyId, partySize, partyMax, matchSecret, joinSecret, spectateSecret, instance);
-    }
-
-    @Override
-    protected List<String> getFieldOrder()
-    {
-        return FIELD_ORDER;
     }
 }

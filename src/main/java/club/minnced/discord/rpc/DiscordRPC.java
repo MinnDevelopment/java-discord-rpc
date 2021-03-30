@@ -17,7 +17,6 @@
 package club.minnced.discord.rpc;
 
 import club.minnced.discord.rpc.internal.DiscordRPCImpl;
-import com.sun.jna.Library;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -34,7 +33,7 @@ import javax.annotation.Nullable;
  *   <li>Darwin</li>
  * </ul>
  */
-public interface DiscordRPC extends Library {
+public interface DiscordRPC {
     static DiscordRPC getInstance() {
         return DiscordRPCImpl.getInstance();
     }

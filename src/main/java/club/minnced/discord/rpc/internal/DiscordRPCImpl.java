@@ -23,7 +23,10 @@ import jdk.incubator.foreign.*;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.io.*;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.UncheckedIOException;
 import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodType;
 import java.util.HashMap;
@@ -82,11 +85,14 @@ public class DiscordRPCImpl implements DiscordRPC {
             );
         });
         try (var scope = NativeScope.unboundedScope()) {
+            MemoryAddress handlersAddr = MemoryAddress.NULL;
+            if (handlers != null)
+                handlersAddr = new EventHandlers(handlers).allocate(scope);
             handle.invokeExact(
-                    Structs.wrap(scope, applicationId),
-                    MemoryAddress.NULL, // TODO: Upcalls
-                    autoRegister ? 1 : 0,
-                    Structs.wrap(scope, steamId)
+                Structs.wrap(scope, applicationId),
+                handlersAddr,
+                autoRegister ? 1 : 0,
+                Structs.wrap(scope, steamId)
             );
         } catch (Throwable throwable) {
             throwable.printStackTrace();
@@ -177,15 +183,15 @@ public class DiscordRPCImpl implements DiscordRPC {
         MethodHandle handle = handles.computeIfAbsent("Discord_Respond", (k) -> {
             LibraryLookup.Symbol symbol = lib.lookup(k).orElseThrow();
             return linker.downcallHandle(
-                    symbol,
-                    MethodType.methodType(Void.TYPE, MemoryAddress.class, int.class),
-                    FunctionDescriptor.ofVoid(C_POINTER, C_INT)
+                symbol,
+                MethodType.methodType(Void.TYPE, MemoryAddress.class, int.class),
+                FunctionDescriptor.ofVoid(C_POINTER, C_INT)
             );
         });
         try (var scope = NativeScope.unboundedScope()) {
             handle.invokeExact(
-                    Structs.wrap(scope, userid),
-                    reply
+                Structs.wrap(scope, userid),
+                reply
             );
         } catch (Throwable throwable) {
             throwable.printStackTrace();
@@ -194,7 +200,22 @@ public class DiscordRPCImpl implements DiscordRPC {
 
     @Override
     public void Discord_UpdateHandlers(@Nullable DiscordEventHandlers handlers) {
-        // TODO: Upcalls
+        MethodHandle handle = handles.computeIfAbsent("Discord_UpdateHandlers", (k) -> {
+            LibraryLookup.Symbol symbol = lib.lookup(k).orElseThrow();
+            return linker.downcallHandle(
+                symbol,
+                MethodType.methodType(Void.TYPE, MemoryAddress.class),
+                FunctionDescriptor.ofVoid(C_POINTER)
+            );
+        });
+        try (var scope = NativeScope.unboundedScope()) {
+            MemoryAddress address = MemoryAddress.NULL;
+            if (handlers != null)
+                address = new EventHandlers(handlers).allocate(scope);
+            handle.invokeExact(address);
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+        }
     }
 
     @Override

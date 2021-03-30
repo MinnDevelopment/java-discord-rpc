@@ -9,7 +9,7 @@ plugins {
 group 'club.minnced'
 version '3.0.0-rc'
 
-mainClassName = 'club.minnced.discord.rpc.next.Main'
+mainClassName = 'club.minnced.discord.rpc.internal.Main'
 
 java {
     toolchain.languageVersion.set(JavaLanguageVersion.of(16))

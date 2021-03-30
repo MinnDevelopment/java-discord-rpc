@@ -16,6 +16,7 @@
 
 package club.minnced.discord.rpc.internal;
 
+import club.minnced.discord.rpc.DiscordUser;
 import jdk.incubator.foreign.*;
 
 import java.nio.ByteOrder;
@@ -33,5 +34,21 @@ class Structs {
 
     public static MemoryAddress wrap(NativeScope scope, String string) {
         return string == null ? MemoryAddress.NULL : CLinker.toCString(string, StandardCharsets.UTF_8, scope).address();
+    }
+
+    public static String toString(MemoryAddress address) {
+        return CLinker.toJavaStringRestricted(address, StandardCharsets.UTF_8);
+    }
+
+    public static DiscordUser toUser(MemoryAddress address) {
+        DiscordUser user = new DiscordUser();
+
+        MemorySegment segment = address.asSegmentRestricted(Structs.USER.byteSize());
+        user.userId = Structs.toString(MemoryAccess.getAddressAtIndex(segment, 0));
+        user.username = Structs.toString(MemoryAccess.getAddressAtIndex(segment, 1));
+        user.discriminator = Structs.toString(MemoryAccess.getAddressAtIndex(segment, 2));
+        user.avatar = Structs.toString(MemoryAccess.getAddressAtIndex(segment, 3));
+
+        return user;
     }
 }
