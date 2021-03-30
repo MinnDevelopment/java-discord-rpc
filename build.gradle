@@ -40,7 +40,6 @@ repositories {
 }
 
 dependencies {
-    api 'net.java.dev.jna:jna:4.4.0'
     implementation 'club.minnced:discord-rpc-release:v3.4.0'
     compileOnly 'com.google.code.findbugs:jsr305:3.0.2'
 }

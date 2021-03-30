@@ -16,8 +16,6 @@
 
 package club.minnced.discord.rpc;
 
-import com.sun.jna.Callback;
-
 import java.util.Objects;
 
 /*
@@ -39,7 +37,7 @@ public class DiscordEventHandlers
     /**
      * Handler function for the ready event
      */
-    public interface OnReady extends Callback
+    public interface OnReady
     {
         void accept(DiscordUser user);
     }
@@ -47,7 +45,7 @@ public class DiscordEventHandlers
     /**
      * Handler function for the exceptional events (error, disconnect)
      */
-    public interface OnStatus extends Callback
+    public interface OnStatus
     {
         void accept(int errorCode, String message);
     }
@@ -55,7 +53,7 @@ public class DiscordEventHandlers
     /**
      * Handler function for game update events (joinGame, spectateGame)
      */
-    public interface OnGameUpdate extends Callback
+    public interface OnGameUpdate
     {
         void accept(String secret);
     }
@@ -63,7 +61,7 @@ public class DiscordEventHandlers
     /**
      * Handler function for user join requests
      */
-    public interface OnJoinRequest extends Callback
+    public interface OnJoinRequest
     {
         void accept(DiscordUser request);
     }
