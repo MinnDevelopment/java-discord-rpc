@@ -29,7 +29,7 @@ public class WindowTest {
 			System.err.println("You must specify an application ID in the arguments!");
 			System.exit(-1);
 		}
-		DiscordRPC lib = DiscordRPC.INSTANCE;
+		DiscordRPC lib = DiscordRPC.getInstance();
 		DiscordRichPresence presence = new DiscordRichPresence();
 		String applicationId = args.length < 1 ? "" : args[0];
 		String steamId       = args.length < 2 ? "" : args[1];

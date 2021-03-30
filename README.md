@@ -82,7 +82,7 @@ import club.minnced.discord.rpc.*;
 
 public class Main {
     public static void main(String[] args) {
-        DiscordRPC lib = DiscordRPC.INSTANCE;
+        DiscordRPC lib = DiscordRPC.getInstance();
         String applicationId = "";
         String steamId = "";
         DiscordEventHandlers handlers = new DiscordEventHandlers();

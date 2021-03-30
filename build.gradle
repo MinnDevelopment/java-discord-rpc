@@ -1,26 +1,41 @@
 plugins {
+    id 'application'
     id 'java-library'
     id 'maven-publish'
-    id 'com.jfrog.bintray' version '1.7.3'
     id 'org.jetbrains.kotlin.jvm' version '1.3.21'
-    id 'com.github.johnrengelman.shadow' version '4.0.4'
+//    id 'com.github.johnrengelman.shadow' version '4.0.4'
 }
 
 group 'club.minnced'
-version '2.0.2'
+version '3.0.0-rc'
 
-sourceSets {
-    examples {
-        compileClasspath = main.output
-        runtimeClasspath = main.output
-        java.srcDirs = ['examples/java']
-        kotlin.srcDirs = ['examples/kotlin']
-    }
+mainClassName = 'club.minnced.discord.rpc.next.Main'
+
+java {
+    toolchain.languageVersion.set(JavaLanguageVersion.of(16))
 }
 
-sourceCompatibility = targetCompatibility = JavaVersion.VERSION_1_8
+tasks.withType(JavaCompile).configureEach {
+    doFirst {
+        options.forkOptions.jvmArgs += ["--add-opens", "jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED"]
+        options.compilerArgs += ["--add-modules=jdk.incubator.foreign"]
+    }
+    options.release.set(16)
+}
+tasks.withType(JavaExec).configureEach {
+    jvmArgs("-Dforeign.restricted=permit",
+            "--add-modules", "jdk.incubator.foreign")
+}
+tasks.withType(Test).configureEach {
+    useJUnitPlatform()
+    jvmArgs("-Dforeign.restricted=permit",
+            "--add-modules", "jdk.incubator.foreign")
+}
 
 repositories {
+    mavenLocal()
+    google()
+    mavenCentral()
     jcenter()
 }
 
@@ -28,8 +43,6 @@ dependencies {
     api 'net.java.dev.jna:jna:4.4.0'
     implementation 'club.minnced:discord-rpc-release:v3.4.0'
     compileOnly 'com.google.code.findbugs:jsr305:3.0.2'
-    examplesCompile 'org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.3.21'
-    examplesCompile compileJava.classpath
 }
 
 tasks.withType(JavaCompile) {
@@ -47,7 +60,7 @@ task sources(type: Copy) {
 classes.dependsOn sources
 
 jar {
-    baseName = project.name
+    archivesBaseName = project.name
     manifest {
         attributes 'Implementation-Version': version
         attributes 'Target-Platforms': 'win32-x86-64, win32-x86, linux-x86-64, darwin'
@@ -78,63 +91,18 @@ task javadocJar(type: Jar, dependsOn: javadoc) {
     from javadoc.destinationDir
 }
 
-publishing {
-    publications {
-        BintrayRelease(MavenPublication) {
-            from components.java
-            groupId group
-            artifactId archivesBaseName
-            version version
-
-            artifact javadocJar
-            artifact sourcesJar
-        }
-    }
-}
-
-bintray {
-    user = getProjectProperty('bintrayUsername')
-    key = getProjectProperty('bintrayApiKey')
-    publications = ["BintrayRelease"]
-    pkg {
-        repo = 'maven'
-        name = project.name
-        licenses = ['Apache-2.0']
-        vcsUrl = 'https://github.com/MinnDevelopment/java-discord-rpc.git'
-        githubRepo = 'MinnDevelopment/java-discord-rpc'
-        publish = true
-        version {
-            name = project.version
-            vcsTag = project.version
-            released = new Date()
-            gpg {
-                sign = true
-            }
-        }
-    }
-}
-
-bintrayUpload {
-    dependsOn clean
-    dependsOn build
-    build.mustRunAfter clean
-
-    onlyIf { !getProjectProperty('bintrayUsername').empty }
-    onlyIf { !getProjectProperty('bintrayApiKey').empty }
-}
-
 def getProjectProperty(String key) {
-    return hasProperty(key) ? this.properties[key] : ''
+    return hasProperty(key) ? findProperty(key) : ''
 }
 
 build {
     dependsOn jar
     dependsOn javadocJar
     dependsOn sourcesJar
-    dependsOn shadowJar
+//    dependsOn shadowJar
 
     jar.mustRunAfter clean
     javadocJar.mustRunAfter jar
     sourcesJar.mustRunAfter javadocJar
-    shadowJar.mustRunAfter sourcesJar
+//    shadowJar.mustRunAfter sourcesJar
 }

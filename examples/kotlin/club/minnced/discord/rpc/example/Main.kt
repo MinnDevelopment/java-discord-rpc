@@ -63,7 +63,7 @@ fun main(args: Array<String>) {
 
 }
 
-fun discord(block: DiscordRPC.() -> Unit) = DiscordRPC.INSTANCE.apply(block)
+fun discord(block: DiscordRPC.() -> Unit) = DiscordRPC.getInstance().apply(block)
 fun handlers(block: DiscordEventHandlers.() -> Unit) = DiscordEventHandlers().apply(block)
 fun DiscordRPC.presence(block: DiscordRichPresence.() -> Unit) {
     Discord_UpdatePresence(DiscordRichPresence().apply(block))

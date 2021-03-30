@@ -16,15 +16,15 @@
 
 package club.minnced.discord.rpc;
 
+import club.minnced.discord.rpc.internal.DiscordRPCImpl;
 import com.sun.jna.Library;
-import com.sun.jna.Native;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 /**
  * Core library binding for the official <a href="https://github.com/discordapp/discord-rpc" target="_blank">Discord RPC SDK</a>.
- * <br>Use {@link #INSTANCE} to access this library.
+ * <br>Use {@link #getInstance()} to access this library.
  * 
  * <h1>Supported Architectures</h1>
  * <ul>
@@ -34,12 +34,10 @@ import javax.annotation.Nullable;
  *   <li>Darwin</li>
  * </ul>
  */
-public interface DiscordRPC extends Library
-{
-    /**
-     * Library instance.
-     */
-    DiscordRPC INSTANCE = Native.loadLibrary("discord-rpc", DiscordRPC.class);
+public interface DiscordRPC extends Library {
+    static DiscordRPC getInstance() {
+        return DiscordRPCImpl.getInstance();
+    }
 
     /**
      * Used to decline a request via {@link #Discord_Respond(String, int)}
