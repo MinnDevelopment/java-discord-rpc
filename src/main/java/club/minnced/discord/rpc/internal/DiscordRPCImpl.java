@@ -60,7 +60,7 @@ public class DiscordRPCImpl implements DiscordRPC {
             else
                 platform = "win32-x86";
             nameFormat += "%s.dll";
-        } else if (os.contains("nix")) {
+        } else if (os.contains("nix") || os.contains("linux")) {
             if (is64)
                 platform = "linux-x86-64";
             else
