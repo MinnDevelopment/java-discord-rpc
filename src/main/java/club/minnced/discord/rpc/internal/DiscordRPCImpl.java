@@ -29,6 +29,8 @@ import java.io.InputStream;
 import java.io.UncheckedIOException;
 import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodType;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -46,10 +48,38 @@ public class DiscordRPCImpl implements DiscordRPC {
     public synchronized static DiscordRPCImpl getInstance() {
         if (instance != null)
             return instance;
-        // TODO: Determine platform here
-        try (InputStream resource = Main.class.getResourceAsStream("/win32-x86-64/discord-rpc.dll");
-             FileOutputStream fout = new FileOutputStream("discord-rpc.dll")) { // TODO: Make this use /tmp instead
-            resource.transferTo(fout);
+        String os = System.getProperty("os.name").toLowerCase();
+        String arch = System.getProperty("os.arch");
+
+        String platform;
+        String nameFormat = "%s/";
+        boolean is64 = arch.contains("64");
+        if (os.contains("win")) {
+            if (is64)
+                platform = "win32-x86-64";
+            else
+                platform = "win32-x86";
+            nameFormat += "%s.dll";
+        } else if (os.contains("nix")) {
+            if (is64)
+                platform = "linux-x86-64";
+            else
+                platform = "linux-x86";
+            nameFormat += "lib%s.so";
+        } else if (os.contains("mac")) {
+            platform = "darwin";
+            nameFormat += "lib%s.dylib";
+        } else {
+            throw new IllegalStateException("Cannot determine platform!");
+        }
+
+        String path = String.format(nameFormat, platform, "discord-rpc");
+        try {
+            Files.createDirectories(Paths.get(platform));
+            try (InputStream resource = DiscordRPCImpl.class.getResourceAsStream("/" + path);
+                 FileOutputStream fout = new FileOutputStream(path)) { // TODO: Make this use /tmp instead
+                resource.transferTo(fout);
+            }
         } catch (IOException e) {
             throw new UncheckedIOException(e);
         }
