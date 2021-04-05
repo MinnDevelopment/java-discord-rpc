@@ -7,7 +7,7 @@
 
 [ ![bintray-version][bintray-version] ][bintray-download] [ ![jitpack-version][jitpack-version] ][jitpack-setup]
 
-This library contains Java bindings for [Discord's official RPC SDK](https://github.com/discordapp/discord-rpc) using JNA.
+This library contains Java bindings for [Discord's official RPC SDK](https://github.com/discordapp/discord-rpc) using [JEP-389: Foreign Linker API (incubator)](https://openjdk.java.net/jeps/389).
 
 This project provides binaries for `linux-x86-64`, `win32-x86-64`, `win32-x86`, and `darwin`.
 The binaries can be found at [MinnDevelopment/discord-rpc-release](https://github.com/MinnDevelopment/discord-rpc-release)
@@ -65,7 +65,7 @@ dependencies {
 
 ### Compile Yourself
 
-1. Install git and JDK 8+
+1. Install git and JDK 16
 2. `git clone https://github.com/minndevelopment/java-discord-rpc`
 3. `cd java-discord-rpc`
 4. `./gradlew build` or on windows `gradlew build`
