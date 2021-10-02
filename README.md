@@ -3,6 +3,10 @@
 [jitpack-version]: https://jitpack.io/v/MinnDevelopment/java-discord-rpc.svg
 [jitpack-setup]: https://jitpack.io/#MinnDevelopment/java-discord-rpc
 
+# NOTICE
+
+This library is discontinued since the original project [discord-rpc](/discord/discord-rpc) is no longer being maintained. Discord now expects you to use the [Game SDK](https://discord.com/developers/docs/game-sdk/sdk-starter-guide) which is not open source and will not be wrapped by this project. More information on the deprecation notice can be found here: [Deprecation and Migration to Discord GameSDK](https://github.com/discord/discord-rpc/issues/290)
+
 # java-discord-rpc
 
 [ ![bintray-version][bintray-version] ][bintray-download] [ ![jitpack-version][jitpack-version] ][jitpack-setup]
