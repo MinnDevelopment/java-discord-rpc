@@ -5,13 +5,13 @@
 
 # NOTICE
 
-This library is discontinued since the original project [discord-rpc](/discord/discord-rpc) is no longer being maintained. Discord now expects you to use the [Game SDK](https://discord.com/developers/docs/game-sdk/sdk-starter-guide) which is not open source and will not be wrapped by this project. More information on the deprecation notice can be found here: [Deprecation and Migration to Discord GameSDK](https://github.com/discord/discord-rpc/issues/290)
+This library is discontinued since the original project [discord-rpc](https://github.com/discord/discord-rpc) is no longer being maintained. Discord now expects you to use the [Game SDK](https://discord.com/developers/docs/game-sdk/sdk-starter-guide) which is not open source and will not be wrapped by this project. More information on the deprecation notice can be found here: [Deprecation and Migration to Discord GameSDK](https://github.com/discord/discord-rpc/issues/290)
 
 # java-discord-rpc
 
 [ ![bintray-version][bintray-version] ][bintray-download] [ ![jitpack-version][jitpack-version] ][jitpack-setup]
 
-This library contains Java bindings for [Discord's official RPC SDK](https://github.com/discordapp/discord-rpc) using JNA.
+This library contains Java bindings for [Discord's official RPC SDK](https://github.com/discord/discord-rpc) using JNA.
 
 This project provides binaries for `linux-x86-64`, `win32-x86-64`, `win32-x86`, and `darwin`.
 The binaries can be found at [MinnDevelopment/discord-rpc-release](https://github.com/MinnDevelopment/discord-rpc-release)
